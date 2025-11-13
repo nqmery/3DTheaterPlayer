@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestMultiDisplay"
-        xmlns:controls="clr-namespace:WpfNumericTextBoxStudy"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid ShowGridLines="True">
@@ -16,12 +15,6 @@
 
         </Grid.ColumnDefinitions>
         <TextBox x:Name="LogDisplay" Grid.Column="3" TextWrapping="Wrap" Margin="10,10,10,10" VerticalScrollBarVisibility="Auto" />
-        <Button x:Name="LogTestButton" Grid.Column="0" Content="Get Displays Info" Margin="10,349,45,0" Click="LogButtonPressed" Height="22" VerticalAlignment="Top"/>
-        <Button x:Name="Button1" Grid.Column="0" Content="左ウィンドウの生成" Margin="10,0,45,378" Click="Button1_Click" Height="22" VerticalAlignment="Bottom"/>
-        <Button x:Name="Button2" Grid.Column="0" Content="右ウィンドウの生成" Margin="10,0,45,351" Click="Button2_Click" Height="22" VerticalAlignment="Bottom"/>
-        <Label Content="左" HorizontalAlignment="Left" Margin="10,287,0,0" VerticalAlignment="Top"/>
-        <Label Content="右" HorizontalAlignment="Left" Margin="10,314,0,0" VerticalAlignment="Top"/>
-        <controls:IntTextBox x:Name="NumLeftDisplay" HorizontalAlignment="Left" Margin="47,291,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="75"/>
-        <controls:IntTextBox x:Name="NumRightDisplay" HorizontalAlignment="Left" Margin="47,318,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="LogTestButton" Content="Button" HorizontalAlignment="Left" Margin="60,166,0,0" VerticalAlignment="Top" Click="LogButtonPressed"/>
     </Grid>
 </Window>

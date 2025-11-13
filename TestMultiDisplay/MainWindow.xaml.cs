@@ -19,15 +19,12 @@ namespace TestMultiDisplay
     /// </summary>
     public partial class MainWindow : Window
     {
-        //define
-        const int LEFT_SCREEN_DEFAULT = 0;
-        const int RIGHT_SCREEN_DEFAULT = 1;
+
 
         //外部のstaticインスタンスを保持
         DisplaysManager dm;
 
 
-        //左右のスクリーンのインスタンス
         public MainWindow()
         {
             InitializeComponent();
@@ -89,7 +86,7 @@ namespace TestMultiDisplay
         //テスト用 ボタン押したらログ出る
         private void LogButtonPressed(object sender, RoutedEventArgs e)
         {
-            dm.InitializeDisplays(int.Parse(NumLeftDisplay.Text), int.Parse(NumRightDisplay.Text));
+            dm.ShowDisplaysInfo();
         }
 
         public void Start()
@@ -97,7 +94,6 @@ namespace TestMultiDisplay
             LogDisplay.Clear();
             App.WriteLog("プログラムが起動しました。");
             dm.ShowDisplaysInfo();
-            dm.InitializeDisplays(LEFT_SCREEN_DEFAULT, RIGHT_SCREEN_DEFAULT);
 
         }
 
@@ -108,45 +104,6 @@ namespace TestMultiDisplay
             LogDisplay.AppendText("[" + System.DateTime.Now.ToString("hh:mm:ss.ff") + "]" + str + "\n");
             // スクロールを一番下に移動
             LogDisplay.ScrollToEnd();
-        }
-
-
-
-        private void Button1_Click(object sender, RoutedEventArgs e)
-        {
-            var bounds = dm.LeftScreen.Bounds;
-            Window LeftWindow = new Window
-            {
-                Background = new SolidColorBrush(Colors.Black),
-                WindowStartupLocation = WindowStartupLocation.Manual,
-                WindowState = WindowState.Normal,
-                WindowStyle = WindowStyle.None,
-                //Topmost = true,
-                Left = bounds.Left,
-                Top = bounds.Top,
-                Width = bounds.Width,
-                Height = bounds.Height
-            };
-            LeftWindow.Show();
-            LeftWindow.WindowState = WindowState.Maximized; 
-        }
-        private void Button2_Click(object sender, RoutedEventArgs e)
-        {
-            var bounds = dm.RightScreen.Bounds;
-            Window RightWindow = new Window
-            {
-                Background = new SolidColorBrush(Colors.Black),
-                WindowStartupLocation = WindowStartupLocation.Manual,
-                WindowState = WindowState.Normal,
-                WindowStyle = WindowStyle.None,
-                //Topmost = true,
-                Left = bounds.Left,
-                Top = bounds.Top,
-                Width = bounds.Width,
-                Height = bounds.Height
-            };
-            RightWindow.Show();
-            RightWindow.WindowState = WindowState.Maximized;
         }
     }
     
