@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="WPF_MediaPlayer.Controls.MediaPlayer"
+             x:Name="root"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_MediaPlayer.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             PreviewKeyDown="UserControl_PreviewKeyDown">
+
+    <UserControl.Resources>
+        <Storyboard x:Key="TimelineStory" Name="TimelineStory" SlipBehavior="Slip">
+            <MediaTimeline Name="Timeline"
+                           Source="{Binding ElementName=Media, Path=Source}"
+                           Storyboard.TargetName="Media"
+                           BeginTime="{Binding ElementName=Media, Path=Position}"
+                           Duration="{Binding ElementName=Media, Path=NaturalDuration}"
+                           CurrentTimeInvalidated="MediaTimeline_CurrentTimeInvalidated"/>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <MediaElement Name="Media"
+                      ScrubbingEnabled="True"
+                      Loaded="Media_Loaded"
+                      MediaOpened="Media_MediaOpened"
+                      MediaEnded="Media_MediaEnded"
+                      PreviewMouseLeftButtonDown="Media_PreviewMouseLeftButtonDown"
+                      Source="file:///E:\purple\Videos\YouTube_backup\Qruppo\master [master.m3u8ht2_nicovideo=6-Box1X7nKRO_1665885689068].mp4"/>
+
+        <Slider Name="SeekSlider" Grid.Row="1" Margin="5"
+                PreviewMouseLeftButtonDown="SeekSlider_PreviewMouseLeftButtonDown" 
+                PreviewMouseLeftButtonUp="SeekSlider_PreviewMouseLeftButtonUp"
+                ValueChanged="SeekSlider_ValueChanged" />
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Name="PlayButton" Content="Play" Margin="5" Click="PlayButton_Click" Focusable="False"/>
+            <Button Name="PauseButton" Content="Pause" Margin="5" Click="PauseButton_Click" Focusable="False"/>
+            <Button Name="StopButton" Content="Stop" Margin="5" Click="StopButton_Click" Focusable="False"/>
+            <Slider Name="VolumeSlider" Width="100" Maximum="1" Margin="5" Value="{Binding ElementName=Media, Path=Volume}"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

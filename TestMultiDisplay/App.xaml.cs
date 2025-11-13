@@ -20,7 +20,7 @@ namespace TestMultiDisplay
             // メインウィンドウ
             mainWindow = new MainWindow();
             mainWindow.Show();
-            mainWindow.Start();
+            mainWindow.Start();//ウィンドウ表示後に開始処理を呼ぶ
         }
 
         //終了時処理
