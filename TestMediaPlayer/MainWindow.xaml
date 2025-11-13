@@ -7,7 +7,23 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="Button_CreatePlayerWindow" Content="Button" HorizontalAlignment="Left" Margin="215,147,0,0" VerticalAlignment="Top" Click="Button_CreatePlayerWindow_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" x:Name="Button_CreatePlayerWindow" Content="Button" HorizontalAlignment="Left" Margin="215,147,0,0" VerticalAlignment="Top" Click="Button_CreatePlayerWindow_Click"/>
+        <Slider Name="SeekSlider" Grid.Row="1" Margin="5"
+        PreviewMouseLeftButtonDown="SeekSlider_PreviewMouseLeftButtonDown" 
+        PreviewMouseLeftButtonUp="SeekSlider_PreviewMouseLeftButtonUp"
+        ValueChanged="SeekSlider_ValueChanged" />
 
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Name="PlayButton" Content="Play" Margin="5" Click="PlayButton_Click" Focusable="False"/>
+            <Button Name="PauseButton" Content="Pause" Margin="5" Click="PauseButton_Click" Focusable="False"/>
+            <Button Name="StopButton" Content="Stop" Margin="5" Click="StopButton_Click" Focusable="False"/>
+            <Slider Name="VolumeSlider" Width="100" Maximum="1" Margin="5" Value="{Binding ElementName=Media, Path=Volume}"/>
+        </StackPanel>
     </Grid>
+    
 </Window>

@@ -21,11 +21,6 @@
     </UserControl.Resources>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
 
         <MediaElement Name="Media"
                       ScrubbingEnabled="True"
@@ -35,16 +30,16 @@
                       PreviewMouseLeftButtonDown="Media_PreviewMouseLeftButtonDown"
                       Source="file:///E:\purple\Videos\YouTube_backup\Qruppo\master [master.m3u8ht2_nicovideo=6-Box1X7nKRO_1665885689068].mp4"/>
 
-        <Slider Name="SeekSlider" Grid.Row="1" Margin="5"
-                PreviewMouseLeftButtonDown="SeekSlider_PreviewMouseLeftButtonDown" 
-                PreviewMouseLeftButtonUp="SeekSlider_PreviewMouseLeftButtonUp"
-                ValueChanged="SeekSlider_ValueChanged" />
+        <Slider Name="SeekSlider" Margin="54,473,-44,-47"
+        PreviewMouseLeftButtonDown="SeekSlider_PreviewMouseLeftButtonDown" 
+        PreviewMouseLeftButtonUp="SeekSlider_PreviewMouseLeftButtonUp"
+        ValueChanged="SeekSlider_ValueChanged" Visibility="Hidden" />
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Button Name="PlayButton" Content="Play" Margin="5" Click="PlayButton_Click" Focusable="False"/>
-            <Button Name="PauseButton" Content="Pause" Margin="5" Click="PauseButton_Click" Focusable="False"/>
-            <Button Name="StopButton" Content="Stop" Margin="5" Click="StopButton_Click" Focusable="False"/>
-            <Slider Name="VolumeSlider" Width="100" Maximum="1" Margin="5" Value="{Binding ElementName=Media, Path=Volume}"/>
+        <StackPanel Orientation="Horizontal" Margin="0,290,0,-290" Visibility="Hidden">
+            <Button Name="PlayButton" Content="Play" Margin="5" Click="PlayButton_Click" Focusable="False" Height="22"/>
+            <Button Name="PauseButton" Content="Pause" Margin="5" Click="PauseButton_Click" Focusable="False" Height="22"/>
+            <Button Name="StopButton" Content="Stop" Margin="5" Click="StopButton_Click" Focusable="False" Height="22"/>
+            <Slider Name="VolumeSlider" Width="100" Maximum="1" Margin="5" Value="{Binding ElementName=Media, Path=Volume}" Height="20"/>
         </StackPanel>
 
     </Grid>

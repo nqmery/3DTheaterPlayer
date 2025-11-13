@@ -1,4 +1,4 @@
-﻿//ほぼコピペ(xamlも)
+﻿//参考(xamlも):
 //https://qiita.com/jakucho0926/items/d2d71080bd1f5c39495a#%E5%AE%9F%E8%A3%85%E6%96%B9%E6%B3%95%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6
 
 
@@ -31,24 +31,42 @@ namespace WPF_MediaPlayer.Controls
 
         #region Properties
 
-        protected Storyboard TimelineStory
+        public Storyboard TimelineStory
         {
             get { return (Storyboard)this.FindResource(nameof(TimelineStory)); }
         }
 
+        // 外部に位置や状態を通知するためのイベント
+        public event EventHandler<TimeSpan> PositionChanged;
+        public event EventHandler<TimeSpan> DurationChanged;
+
         protected bool IsPlaying
         {
             get { return this.Media.Clock != null && !this.IsPaused && !this.IsStopped; }
+        }
+        //外部から再生状態を知りたい場合に使う
+        public bool IsPlayingPublic
+        {
+            get { return this.IsPlaying; }
         }
 
         protected bool IsPaused
         {
             get { return this.Media.Clock != null && this.Media.Clock.IsPaused; }
         }
+        //外部から停止状態を知りたい場合に使う
+        public bool IsPausedPublic
+        {
+            get { return this.IsPaused; }
+        }
 
         protected bool IsStopped
         {
             get { return this.Media.Clock == null || this.Media.Clock.CurrentState.HasFlag(ClockState.Stopped); }
+        }
+        public bool IsStoppedPublic
+            {
+            get { return this.IsStopped; }
         }
 
         #endregion
@@ -125,6 +143,9 @@ namespace WPF_MediaPlayer.Controls
             this.SeekSlider.Maximum = this.Media.NaturalDuration.TimeSpan.TotalMilliseconds;
             // ここで開始したければ Play() を呼べます（MediaOpened はソースが確定した後なので安全）。
             // this.Play();
+
+            // DurationChanged を発火
+            DurationChanged?.Invoke(this, this.Media.NaturalDuration.TimeSpan);
         }
 
         private void Media_MediaEnded(object sender, RoutedEventArgs e)
@@ -151,6 +172,9 @@ namespace WPF_MediaPlayer.Controls
         private void MediaTimeline_CurrentTimeInvalidated(object sender, EventArgs e)
         {
             this.SeekSlider.Value = this.Media.Position.TotalMilliseconds;
+
+            // PositionChanged を発火
+            PositionChanged?.Invoke(this, this.Media.Position);
         }
 
         private void SeekSlider_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
