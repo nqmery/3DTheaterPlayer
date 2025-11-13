@@ -20,6 +20,10 @@ namespace TestMultiDisplay
         // 外部から new できないようにする（必要なら internal にしても可）
         private DisplaysManager() { }
 
+
+        public Screen LeftScreen { get; private set; }
+        public Screen RightScreen { get; private set; }
+
         //テスト用 ディスプレイの情報をログに表示
         public void ShowDisplaysInfo()
         {
@@ -48,6 +52,14 @@ namespace TestMultiDisplay
             //ディスプレイの大きさを表示
             App.WriteLog($"高さ:{s.Bounds.Height} 幅:{s.Bounds.Width}");
             */
+        }
+
+
+        public void InitializeDisplays(int LeftScreenNum, int RightScreenNum)
+        {
+            LeftScreen = Screen.AllScreens[LeftScreenNum];
+            RightScreen = Screen.AllScreens[RightScreenNum];
+
         }
     }
 }
