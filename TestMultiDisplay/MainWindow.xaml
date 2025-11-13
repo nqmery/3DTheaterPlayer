@@ -21,7 +21,7 @@
         <Button x:Name="Button2" Grid.Column="0" Content="右ウィンドウの生成" Margin="10,0,45,351" Click="Button2_Click" Height="22" VerticalAlignment="Bottom"/>
         <Label Content="左" HorizontalAlignment="Left" Margin="10,287,0,0" VerticalAlignment="Top"/>
         <Label Content="右" HorizontalAlignment="Left" Margin="10,314,0,0" VerticalAlignment="Top"/>
-        <controls:IntTextBox x:Name="NumLeftDisplay" HorizontalAlignment="Left" Margin="47,291,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75"/>
-        <controls:IntTextBox x:Name="NumRightDisplay" HorizontalAlignment="Left" Margin="47,318,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" TextChanged="NumRightDisplay_TextChanged"/>
+        <controls:IntTextBox x:Name="NumLeftDisplay" HorizontalAlignment="Left" Margin="47,291,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="75"/>
+        <controls:IntTextBox x:Name="NumRightDisplay" HorizontalAlignment="Left" Margin="47,318,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>

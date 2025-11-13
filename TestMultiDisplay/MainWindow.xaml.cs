@@ -148,11 +148,6 @@ namespace TestMultiDisplay
             RightWindow.Show();
             RightWindow.WindowState = WindowState.Maximized;
         }
-
-        private void NumRightDisplay_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
     
     
