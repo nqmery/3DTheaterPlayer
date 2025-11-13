@@ -11,6 +11,8 @@ using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.Drawing;
 
+using MessageBox = System.Windows.MessageBox;
+
 
 namespace TestMultiDisplay
 {
@@ -26,6 +28,9 @@ namespace TestMultiDisplay
         //外部のstaticインスタンスを保持
         DisplaysManager dm;
 
+        // 左右のスクリーンのウィンドウ参照（クラスフィールドとして保持）
+        private Window? leftWindow;
+        private Window? rightWindow;
 
         //左右のスクリーンのインスタンス
         public MainWindow()
@@ -115,7 +120,7 @@ namespace TestMultiDisplay
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
             var bounds = dm.LeftScreen.Bounds;
-            Window LeftWindow = new Window
+            leftWindow = new Window
             {
                 Background = new SolidColorBrush(Colors.Black),
                 WindowStartupLocation = WindowStartupLocation.Manual,
@@ -127,13 +132,14 @@ namespace TestMultiDisplay
                 Width = bounds.Width,
                 Height = bounds.Height
             };
-            LeftWindow.Show();
-            LeftWindow.WindowState = WindowState.Maximized; 
+            leftWindow.Show();
+            leftWindow.WindowState = WindowState.Maximized; 
         }
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
+            
             var bounds = dm.RightScreen.Bounds;
-            Window RightWindow = new Window
+            rightWindow = new Window
             {
                 Background = new SolidColorBrush(Colors.Black),
                 WindowStartupLocation = WindowStartupLocation.Manual,
@@ -145,13 +151,27 @@ namespace TestMultiDisplay
                 Width = bounds.Width,
                 Height = bounds.Height
             };
-            RightWindow.Show();
-            RightWindow.WindowState = WindowState.Maximized;
+            rightWindow.Show();
+            rightWindow.WindowState = WindowState.Maximized;
+            
         }
+
+        
 
         private void NumRightDisplay_TextChanged(object sender, TextChangedEventArgs e)
         {
+            
+        }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("設定を保存しますか？",
+                    "終了",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                MessageBox.Show("TODO:設定の保存処理", "保存処理が実装されていません", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
     

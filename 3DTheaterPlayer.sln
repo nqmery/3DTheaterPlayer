@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3DVideoPlayer", "3DVideoPlayer\3DVideoPlayer.csproj", "{8F2C1403-0F34-43B4-8873-1AE9FCC0A31E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMultiDisplay", "TestMultiDisplay\TestMultiDisplay.csproj", "{1FA4A2E6-8813-4742-BF04-4F5406116F19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMediaPlayer", "TestMediaPlayer\TestMediaPlayer.csproj", "{194492AD-2756-4BCC-A607-5EC9CB6FD4D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{1FA4A2E6-8813-4742-BF04-4F5406116F19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FA4A2E6-8813-4742-BF04-4F5406116F19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FA4A2E6-8813-4742-BF04-4F5406116F19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{194492AD-2756-4BCC-A607-5EC9CB6FD4D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{194492AD-2756-4BCC-A607-5EC9CB6FD4D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{194492AD-2756-4BCC-A607-5EC9CB6FD4D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{194492AD-2756-4BCC-A607-5EC9CB6FD4D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A2DBEE12-A808-47EA-A8FE-B1D581201D27}
 	EndGlobalSection
 EndGlobal
