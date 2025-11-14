@@ -386,8 +386,6 @@ namespace _3DVideoPlayer
             }
             Button1.IsEnabled = true;//再作成ボタン有効化
             Button1_Destroy.IsEnabled = false;//破棄ボタン無効化
-            LeftDDLabel.Visibility = Visibility.Visible;//ドラッグアンドドロップラベル表示
-            LeftDragArea.AllowDrop = true;//ドラッグアンドドロップ有効化
         }
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
@@ -460,8 +458,6 @@ namespace _3DVideoPlayer
             }
             Button2.IsEnabled = true;//再作成ボタン有効化
             Button2_Destroy.IsEnabled = false;//破棄ボタン無効化
-            RightDDLabel.Visibility = Visibility.Visible;//ドラッグアンドドロップラベル表示
-            RightDragArea.AllowDrop = true;//ドラッグアンドドロップ有効化
         }
 
         private void NumRightDisplay_TextChanged(object sender, TextChangedEventArgs e)
@@ -470,14 +466,14 @@ namespace _3DVideoPlayer
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
+        {/*
             if (MessageBox.Show("設定を保存しますか？",
                     "終了",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 MessageBox.Show("TODO:設定の保存処理", "保存処理が実装されていません", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+            }*/
         }
 
         private void LeftMediaPlayerControl_VideoSizeChanged(object sender, Size newSize)
