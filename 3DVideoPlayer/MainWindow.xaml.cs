@@ -345,7 +345,6 @@ namespace _3DVideoPlayer
             leftPlayer.WindowState = WindowState.Maximized;
 
             App.WriteLog("左画面のプレイヤーを作成しました。");
-            App.WriteLog("動画サイズ: " + leftMediaPlayerControl.Media.ActualWidth + "x" + leftMediaPlayerControl.Media.ActualHeight);
             Button1.IsEnabled = false;//二重起動防止
             Button1_Destroy.IsEnabled = true;//破棄ボタン有効化
             LeftDDLabel.Visibility = Visibility.Visible;//ドラッグアンドドロップラベル表示
@@ -421,7 +420,6 @@ namespace _3DVideoPlayer
             rightPlayer.WindowState = WindowState.Maximized;
 
             App.WriteLog("右画面のプレイヤーを作成しました。");
-            App.WriteLog("動画サイズ: " + rightMediaPlayerControl.Media.ActualWidth + "x" + rightMediaPlayerControl.Media.ActualHeight);
             Button2.IsEnabled = false;//二重起動防止
             Button2_Destroy.IsEnabled = true;//破棄ボタン有効化
             RightDDLabel.Visibility = Visibility.Visible;//ドラッグアンドドロップラベル表示
