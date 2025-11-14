@@ -202,7 +202,7 @@ namespace WPF_MediaPlayer.Controls
             VideoSizeChanged?.Invoke(this, new Size(videoWidthNow, videoHeightNow));
             App.WriteLog("ファイルの読み込みが完了しました");
 
-            App.WriteLog("元動画のサイズ: " + (int)this.Media.NaturalVideoWidth + "x" + (int)this.Media.NaturalVideoWidth);
+            App.WriteLog("元動画のサイズ: " + (int)this.Media.NaturalVideoWidth + "x" + (int)this.Media.NaturalVideoHeight);
         }
 
         private void Media_MediaEnded(object sender, RoutedEventArgs e)
