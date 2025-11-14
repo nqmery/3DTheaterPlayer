@@ -42,7 +42,7 @@ ValueChanged="LeftSeekSlider_ValueChanged" />
             <Button Name="LeftPlayButton" Content="Play" Margin="5" Click="LeftPlayButton_Click" Focusable="False"/>
             <Button Name="LeftPauseButton" Content="Pause" Margin="5" Click="LeftPauseButton_Click" Focusable="False"/>
             <Button Name="LeftStopButton" Content="Stop" Margin="5" Click="LeftStopButton_Click" Focusable="False"/>
-            <Slider Name="LeftVolumeSlider" Width="38" Minimum="0" Maximum="1" SmallChange="0.01" LargeChange="0.1" Margin="5" Value="0.5" ValueChanged="LeftVolumeSlider_ValueChanged" />
+            <Slider Name="LeftVolumeSlider" Width="38" Minimum="0" Maximum="1" SmallChange="0.01" LargeChange="0.1" Margin="5" Value="1" ValueChanged="LeftVolumeSlider_ValueChanged" />
         </StackPanel>
         <controls:IntTextBox x:Name="LeftVideoHeight" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="1080" VerticalAlignment="Top" Width="93" Margin="7,101,0,0"/>
         <Label Content="動画の高さを指定" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,75,0,0"/>
@@ -79,7 +79,7 @@ ValueChanged="RightSeekSlider_ValueChanged" />
             <Button Name="RightPlayButton" Content="Play" Margin="5" Click="RightPlayButton_Click" Focusable="False"/>
             <Button Name="RightPauseButton" Content="Pause" Margin="5" Click="RightPauseButton_Click" Focusable="False"/>
             <Button Name="RightStopButton" Content="Stop" Margin="5" Click="RightStopButton_Click" Focusable="False"/>
-            <Slider Name="RightVolumeSlider" Width="38" Minimum="0" Maximum="1" SmallChange="0.01" LargeChange="0.1" Margin="5" Value="0.5" ValueChanged="RightVolumeSlider_ValueChanged" />
+            <Slider Name="RightVolumeSlider" Width="38" Minimum="0" Maximum="1" SmallChange="0.01" LargeChange="0.1" Margin="5" ValueChanged="RightVolumeSlider_ValueChanged" />
         </StackPanel>
         <controls:IntTextBox x:Name="RightVideoHeight" Grid.Column="2" HorizontalAlignment="Left" TextWrapping="Wrap" Text="1080" VerticalAlignment="Top" Width="93" Margin="7,101,0,0"/>
         <Label Content="動画の高さを指定" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,75,0,0"/>
