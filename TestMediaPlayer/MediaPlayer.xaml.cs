@@ -40,6 +40,9 @@ namespace WPF_MediaPlayer.Controls
         public event EventHandler<TimeSpan> PositionChanged;
         public event EventHandler<TimeSpan> DurationChanged;
 
+        public double DefaultVideoMarginLeft { get; private set; }
+        public double DefaultVideoMarginTop { get; private set; }
+
         protected bool IsPlaying
         {
             get { return this.Media.Clock != null && !this.IsPaused && !this.IsStopped; }
@@ -65,7 +68,7 @@ namespace WPF_MediaPlayer.Controls
             get { return this.Media.Clock == null || this.Media.Clock.CurrentState.HasFlag(ClockState.Stopped); }
         }
         public bool IsStoppedPublic
-            {
+        {
             get { return this.IsStopped; }
         }
 
@@ -146,6 +149,10 @@ namespace WPF_MediaPlayer.Controls
 
             // DurationChanged を発火
             DurationChanged?.Invoke(this, this.Media.NaturalDuration.TimeSpan);
+
+            //初期位置を取得して保持
+            this.DefaultVideoMarginLeft = this.Media.Margin.Left;
+            this.DefaultVideoMarginTop = this.Media.Margin.Top;
         }
 
         private void Media_MediaEnded(object sender, RoutedEventArgs e)
@@ -276,6 +283,34 @@ namespace WPF_MediaPlayer.Controls
         }
 
         #endregion
+        
+        
+        public void ChangeVideoHeight(double height)
+        {
+            this.Media.Height = height;
+        }
+        /* RenderTransfotmを使うため不使用
+         public void ChangeVideoPosition(double x, double y)
+        {
+            Thickness margin = this.Media.Margin;
+            margin.Left = DefaultVideoMarginLeft + x;
+            margin.Top = DefaultVideoMarginTop + y;
+            this.Media.Margin = margin;
+        }*/
 
+
+        //MediaElementを左に1px移動するテスト用メソッド
+        public void TestMoveLeft()
+        {
+            Thickness margin = this.Media.Margin;
+            margin.Left -= 1;
+            this.Media.Margin = margin;
+        }
+        //テスト
+        private void TestMoveLeft(object sender, RoutedEventArgs e)
+        {
+            this.Media.Width = this.Media.Width - 1;
+
+        }
     }
 }

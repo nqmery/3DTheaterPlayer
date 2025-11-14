@@ -6,8 +6,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_MediaPlayer.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             PreviewKeyDown="UserControl_PreviewKeyDown">
+             d:DesignWidth="1920" d:DesignHeight="1080" 
+             PreviewKeyDown="UserControl_PreviewKeyDown" 
+    xmlns:System="clr-namespace:System;assembly=System.Runtime" >
 
     <UserControl.Resources>
         <Storyboard x:Key="TimelineStory" Name="TimelineStory" SlipBehavior="Slip">
@@ -18,6 +19,7 @@
                            Duration="{Binding ElementName=Media, Path=NaturalDuration}"
                            CurrentTimeInvalidated="MediaTimeline_CurrentTimeInvalidated"/>
         </Storyboard>
+        <System:Double x:Key="MediaElementWidth1">NaN</System:Double>
     </UserControl.Resources>
 
     <Grid>
@@ -28,7 +30,7 @@
                       MediaOpened="Media_MediaOpened"
                       MediaEnded="Media_MediaEnded"
                       PreviewMouseLeftButtonDown="Media_PreviewMouseLeftButtonDown"
-                      Source="file:///E:\purple\Videos\YouTube_backup\Qruppo\master [master.m3u8ht2_nicovideo=6-Box1X7nKRO_1665885689068].mp4"/>
+                      Source="file:///E:\purple\Videos\YouTube_backup\Qruppo\master [master.m3u8ht2_nicovideo=6-Box1X7nKRO_1665885689068].mp4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <Slider Name="SeekSlider" Margin="54,473,-44,-47"
         PreviewMouseLeftButtonDown="SeekSlider_PreviewMouseLeftButtonDown" 
@@ -41,6 +43,7 @@
             <Button Name="StopButton" Content="Stop" Margin="5" Click="StopButton_Click" Focusable="False" Height="22"/>
             <Slider Name="VolumeSlider" Width="100" Maximum="1" Margin="5" Value="{Binding ElementName=Media, Path=Volume}" Height="20"/>
         </StackPanel>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="54,69,0,0" VerticalAlignment="Top" Height="77" Width="139" Click="TestMoveLeft"/>
 
     </Grid>
 </UserControl>

@@ -133,5 +133,37 @@ namespace TestMediaPlayer
             leftMediaPlayerControl?.Stop();
         }
 
+        
+        private void MoveLeft_Click(object sender, RoutedEventArgs e)
+        {
+            leftMediaPlayerControl.TestMoveLeft();
+        }
+
+
+        
+        private void Button_Resize_Click(object sender, RoutedEventArgs e)
+        {
+            
+            int videoHeight = int.Parse(this.VideoHeight.Text);
+            leftMediaPlayerControl.ChangeVideoHeight(videoHeight);
+            
+        }
+
+        //コントロールの位置変更（RenderTransform）
+        private void Button_Move_Click(object sender, RoutedEventArgs e)
+        {
+            var tfg = new TransformGroup();
+            int posX = int.Parse(this.PosX.Text);
+            int posY = int.Parse(this.PosY.Text);
+
+            tfg.Children.Add(new TranslateTransform(posX, posY));
+
+            leftMediaPlayerControl.Media.RenderTransform = tfg;
+            /*
+            int posX = int.Parse(this.PosX.Text);
+            int posY = int.Parse(this.PosY.Text);
+            leftMediaPlayerControl.ChangeVideoPosition(posX, posY);
+            */
+        }
     }
 }

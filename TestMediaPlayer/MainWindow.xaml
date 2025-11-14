@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" x:Name="Button_CreatePlayerWindow" Content="Button" HorizontalAlignment="Left" Margin="215,147,0,0" VerticalAlignment="Top" Click="Button_CreatePlayerWindow_Click"/>
+        <Button Grid.Row="0" x:Name="Button_CreatePlayerWindow" Content="Button" HorizontalAlignment="Left" Margin="437,146,0,0" VerticalAlignment="Top" Click="Button_CreatePlayerWindow_Click"/>
         <Slider Name="SeekSlider" Grid.Row="1" Margin="5"
         PreviewMouseLeftButtonDown="SeekSlider_PreviewMouseLeftButtonDown" 
         PreviewMouseLeftButtonUp="SeekSlider_PreviewMouseLeftButtonUp"
@@ -22,8 +22,18 @@
             <Button Name="PlayButton" Content="Play" Margin="5" Click="PlayButton_Click" Focusable="False"/>
             <Button Name="PauseButton" Content="Pause" Margin="5" Click="PauseButton_Click" Focusable="False"/>
             <Button Name="StopButton" Content="Stop" Margin="5" Click="StopButton_Click" Focusable="False"/>
-            <Slider Name="VolumeSlider" Width="100" Maximum="1" Margin="5" Value="{Binding ElementName=Media, Path=Volume}"/>
+            <Slider Name="VolumeSlider" Width="100" Maximum="1" Margin="5" Value="{Binding ElementName=Media, Path=leftMediaPlayerControl.Media}"/>
         </StackPanel>
+        <Button Name="ButtonMoveLeft" Content="左に移動" HorizontalAlignment="Left" Margin="432,202,0,0" VerticalAlignment="Top" Click="MoveLeft_Click"/>
+        <TextBox Name="VideoHeight" HorizontalAlignment="Left" Margin="520,111,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="VideoHeight" HorizontalAlignment="Left" Margin="520,80,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="Button_Resize" Content="リサイズ！" HorizontalAlignment="Left" Margin="654,110,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.117,-0.328" Click="Button_Resize_Click"/>
+        <TextBox x:Name="PosX" HorizontalAlignment="Left" Margin="520,188,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="PosY" HorizontalAlignment="Left" Margin="520,219,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="X" HorizontalAlignment="Left" Margin="498,184,0,0" VerticalAlignment="Top"/>
+        <Label Content="Y" HorizontalAlignment="Left" Margin="498,215,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="Button_Move" Content="移動！" HorizontalAlignment="Left" Margin="654,204,0,0" VerticalAlignment="Top" Click="Button_Move_Click"/>
+
     </Grid>
-    
+
 </Window>
