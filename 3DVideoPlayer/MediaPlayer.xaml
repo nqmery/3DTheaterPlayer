@@ -27,7 +27,8 @@
                       MediaOpened="Media_MediaOpened"
                       MediaEnded="Media_MediaEnded"
                       PreviewMouseLeftButtonDown="Media_PreviewMouseLeftButtonDown"
-                      Source="{Binding Source, ElementName=root}" HorizontalAlignment="Center" VerticalAlignment="Center" SizeChanged="Media_SizeChanged"/>
+                      Source="{Binding Source, ElementName=root}" HorizontalAlignment="Center" VerticalAlignment="Center" SizeChanged="Media_SizeChanged"
+                      LoadedBehavior="Manual" UnloadedBehavior="Manual"/>
 
         <Slider Name="SeekSlider" Margin="54,473,-44,-47"
         PreviewMouseLeftButtonDown="SeekSlider_PreviewMouseLeftButtonDown" 

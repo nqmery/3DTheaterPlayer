@@ -106,8 +106,8 @@ ValueChanged="RightSeekSlider_ValueChanged" />
 
         <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Background="#4C000000">
             <Button x:Name="ButtonAllPlay" Content="Play" Click="ButtonAllPlay_Click" HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="5"/>
-            <Button x:Name="ButtonAllPause" Content="Pause" HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="5"/>
-            <Button x:Name="ButtonAllStop" Content="Pause" HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="5"/>
+            <Button x:Name="ButtonAllPause" Content="Pause" HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="5" Click="ButtonAllPause_Click"/>
+            <Button x:Name="ButtonAllStop" Content="Stop" HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="5" Click="ButtonAllStop_Click"/>
         </StackPanel>
 
     </Grid>

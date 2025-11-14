@@ -474,6 +474,66 @@ namespace _3DVideoPlayer
             e.Handled = true;
         }
 
+        private void ButtonAllPause_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                try
+                {
+                    if (leftMediaPlayerControl != null)
+                    {
+                        leftMediaPlayerControl.Pause();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    App.WriteLog("ButtonAllPuse: left pause failed - " + ex.Message);
+                }
+
+                try
+                {
+                    if (rightMediaPlayerControl != null)
+                    {
+                        rightMediaPlayerControl.Pause();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    App.WriteLog("ButtonAllPlay: right pause failed - " + ex.Message);
+                }
+            });
+        }
+
+        private void ButtonAllStop_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                try
+                {
+                    if (leftMediaPlayerControl != null)
+                    {
+                        leftMediaPlayerControl.Stop();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    App.WriteLog("ButtonAllPlay: left stop failed - " + ex.Message);
+                }
+
+                try
+                {
+                    if (rightMediaPlayerControl != null)
+                    {
+                        rightMediaPlayerControl.Stop();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    App.WriteLog("ButtonAllPlay: right stop failed - " + ex.Message);
+                }
+            });
+        }
+
         private void RightDrop(object sender, System.Windows.DragEventArgs e)
         {
             try
