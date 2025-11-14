@@ -10,6 +10,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
+using _3DVideoPlayer;
+
 using UserControl = System.Windows.Controls.UserControl;//WPFとWinForms間の参照のバッティングを防ぐ
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using Size = System.Windows.Size;
@@ -184,7 +186,8 @@ namespace WPF_MediaPlayer.Controls
         {
             this.SeekSlider.Maximum = this.Media.NaturalDuration.TimeSpan.TotalMilliseconds;
             // ここで開始したければ Play() を呼べます（MediaOpened はソースが確定した後なので安全）。
-            // this.Play();
+            //this.Play();
+            //this.Pause();
 
             // DurationChanged を発火
             DurationChanged?.Invoke(this, this.Media.NaturalDuration.TimeSpan);
@@ -192,11 +195,18 @@ namespace WPF_MediaPlayer.Controls
             //初期位置を取得して保持
             this.DefaultVideoMarginLeft = this.Media.Margin.Left;
             this.DefaultVideoMarginTop = this.Media.Margin.Top;
+
+            //動画のサイズを取得して発火
+            videoWidthNow = (int)this.Media.ActualWidth;
+            videoHeightNow = (int)this.Media.ActualHeight;
+            VideoSizeChanged?.Invoke(this, new Size(videoWidthNow, videoHeightNow));
+            App.WriteLog("ファイルの読み込みが完了しました");
         }
 
         private void Media_MediaEnded(object sender, RoutedEventArgs e)
         {
-            this.Stop();
+            this.Pause();
+            this.Seek(TimeSpan.FromSeconds(0));
         }
 
         private void Media_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

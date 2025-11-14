@@ -113,7 +113,7 @@ namespace _3DVideoPlayer
             {
                 if (leftMediaPlayerControl.IsPausedPublic)
                 {
-                    leftMediaPlayerControl.Play(TimeSpan.FromMilliseconds(LeftSeekSlider.Value));
+                    //leftMediaPlayerControl.Play(TimeSpan.FromMilliseconds(LeftSeekSlider.Value));
                 }
                 leftMediaPlayerControl.SeekSlider.IsMoveToPointEnabled = false;
             }
@@ -219,7 +219,7 @@ namespace _3DVideoPlayer
             {
                 if (rightMediaPlayerControl.IsPausedPublic)
                 {
-                    rightMediaPlayerControl.Play(TimeSpan.FromMilliseconds(RightSeekSlider.Value));
+                    //rightMediaPlayerControl.Play(TimeSpan.FromMilliseconds(RightSeekSlider.Value));
                 }
                 rightMediaPlayerControl.SeekSlider.IsMoveToPointEnabled = false;
             }
@@ -457,7 +457,12 @@ namespace _3DVideoPlayer
             finally
             {
                 e.Handled = true;
+                leftMediaPlayerControl?.Play();
+                leftMediaPlayerControl?.Pause();
+                leftMediaPlayerControl?.Seek(TimeSpan.FromSeconds(0));
+
             }
+
         }
 
         // Right drag handlers
@@ -501,6 +506,14 @@ namespace _3DVideoPlayer
                 {
                     App.WriteLog("ButtonAllPlay: right pause failed - " + ex.Message);
                 }
+
+                //ズレていた場合、同期を取る(左基準)
+                if (leftMediaPlayerControl != null && rightMediaPlayerControl != null)
+                {
+                    rightMediaPlayerControl.Seek(TimeSpan.FromMilliseconds(LeftSeekSlider.Value));
+                }
+
+
             });
         }
 
@@ -512,7 +525,8 @@ namespace _3DVideoPlayer
                 {
                     if (leftMediaPlayerControl != null)
                     {
-                        leftMediaPlayerControl.Stop();
+                        leftMediaPlayerControl.Pause();
+                        leftMediaPlayerControl.Seek(TimeSpan.FromSeconds(0));
                     }
                 }
                 catch (Exception ex)
@@ -524,7 +538,8 @@ namespace _3DVideoPlayer
                 {
                     if (rightMediaPlayerControl != null)
                     {
-                        rightMediaPlayerControl.Stop();
+                        rightMediaPlayerControl.Pause();
+                        rightMediaPlayerControl.Seek(TimeSpan.FromSeconds(0));
                     }
                 }
                 catch (Exception ex)
@@ -570,6 +585,9 @@ namespace _3DVideoPlayer
             finally
             {
                 e.Handled = true;
+                rightMediaPlayerControl?.Play();
+                rightMediaPlayerControl?.Pause();
+                rightMediaPlayerControl?.Seek(TimeSpan.FromSeconds(0));
             }
         }
 
