@@ -322,6 +322,9 @@ namespace _3DVideoPlayer
             // ここで動画サイズイベントを購読
             leftMediaPlayerControl.VideoSizeChanged += LeftMediaPlayerControl_VideoSizeChanged;
 
+            // 初期ボリュームをスライダーに合わせる
+            try { leftMediaPlayerControl.Media.Volume = LeftVolumeSlider.Value; } catch { }
+
             var bounds = dm.LeftScreen.Bounds;
 
             leftPlayer = new Window
@@ -341,9 +344,51 @@ namespace _3DVideoPlayer
             leftPlayer.Show();
             leftPlayer.WindowState = WindowState.Maximized;
 
-            App.WriteLog("左画面のメディアプレイヤーウィンドウを作成しました。");
+            App.WriteLog("左画面のプレイヤーを作成しました。");
             App.WriteLog("動画サイズ: " + leftMediaPlayerControl.Media.ActualWidth + "x" + leftMediaPlayerControl.Media.ActualHeight);
+            Button1.IsEnabled = false;//二重起動防止
+            Button1_Destroy.IsEnabled = true;//破棄ボタン有効化
+            LeftDDLabel.Visibility = Visibility.Visible;//ドラッグアンドドロップラベル表示
+            LeftDragArea.AllowDrop = true;//ドラッグアンドドロップ有効化
+        }
 
+        private void Button1_Destroy_Click(object sender, RoutedEventArgs e)
+        {
+            //左画面のメディアプレイヤーウィンドウを破棄
+            if (leftPlayer != null)
+            {
+                // 停止・Storyboard の削除
+                try { leftMediaPlayerControl?.Stop(); } catch { }
+                try { leftMediaPlayerControl?.TimelineStory?.Remove(leftMediaPlayerControl); } catch { }
+
+                // イベント解除（存在チェックして安全に解除）
+                if (leftMediaPlayerControl != null)
+                {
+                    try { leftMediaPlayerControl.PositionChanged -= LeftMediaPlayerControl_PositionChanged; } catch { }
+                    try { leftMediaPlayerControl.DurationChanged -= LeftMediaPlayerControl_DurationChanged; } catch { }
+                    try { leftMediaPlayerControl.VideoSizeChanged -= LeftMediaPlayerControl_VideoSizeChanged; } catch { }
+                }
+
+                // Media を閉じてソースを外す
+                try { leftMediaPlayerControl?.Media.Close(); } catch { }
+                if (leftMediaPlayerControl?.Media != null)
+                {
+                    try { leftMediaPlayerControl.Media.Source = null; } catch { }
+                }
+                try { leftMediaPlayerControl.Source = null; } catch { }
+
+                // ウィンドウから切り離して破棄
+                try { leftPlayer.Content = null; } catch { }
+                try { leftPlayer.Close(); } catch { }
+                leftPlayer = null;
+                leftMediaPlayerControl = null;
+
+                App.WriteLog("左画面のプレイヤーを破棄しました。");
+            }
+            Button1.IsEnabled = true;//再作成ボタン有効化
+            Button1_Destroy.IsEnabled = false;//破棄ボタン無効化
+            LeftDDLabel.Visibility = Visibility.Visible;//ドラッグアンドドロップラベル表示
+            LeftDragArea.AllowDrop = true;//ドラッグアンドドロップ有効化
         }
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
@@ -354,6 +399,9 @@ namespace _3DVideoPlayer
             rightMediaPlayerControl.PositionChanged += RightMediaPlayerControl_PositionChanged;
             rightMediaPlayerControl.DurationChanged += RightMediaPlayerControl_DurationChanged;
             rightMediaPlayerControl.VideoSizeChanged += RightMediaPlayerControl_VideoSizeChanged;
+
+            // 初期ボリュームをスライダーに合わせる
+            try { rightMediaPlayerControl.Media.Volume = RightVolumeSlider.Value; } catch { }
 
             var bounds = dm.RightScreen.Bounds;
             rightPlayer = new Window
@@ -372,9 +420,50 @@ namespace _3DVideoPlayer
             rightPlayer.Show();
             rightPlayer.WindowState = WindowState.Maximized;
 
-            App.WriteLog("右画面のメディアプレイヤーウィンドウを作成しました。");
+            App.WriteLog("右画面のプレイヤーを作成しました。");
             App.WriteLog("動画サイズ: " + rightMediaPlayerControl.Media.ActualWidth + "x" + rightMediaPlayerControl.Media.ActualHeight);
+            Button2.IsEnabled = false;//二重起動防止
+            Button2_Destroy.IsEnabled = true;//破棄ボタン有効化
+            RightDDLabel.Visibility = Visibility.Visible;//ドラッグアンドドロップラベル表示
+            RightDragArea.AllowDrop = true;//ドラッグアンドドロップ有効化
+        }
+        private void Button2_Destroy_Click(object sender, RoutedEventArgs e)
+        {
+            //右画面のメディアプレイヤーウィンドウを破棄
+            if (rightPlayer != null)
+            {
+                // 停止・Storyboard の削除
+                rightMediaPlayerControl?.Stop();
+                rightMediaPlayerControl?.TimelineStory?.Remove(rightMediaPlayerControl);
 
+                // イベント解除（存在チェックして安全に解除）
+                if (rightMediaPlayerControl != null)
+                {
+                    try { rightMediaPlayerControl.PositionChanged -= RightMediaPlayerControl_PositionChanged; } catch { }
+                    try { rightMediaPlayerControl.DurationChanged -= RightMediaPlayerControl_DurationChanged; } catch { }
+                    try { rightMediaPlayerControl.VideoSizeChanged -= RightMediaPlayerControl_VideoSizeChanged; } catch { }
+                }
+
+                // Media を閉じてソースを外す
+                try { rightMediaPlayerControl?.Media.Close(); } catch { }
+                if (rightMediaPlayerControl?.Media != null)
+                {
+                    try { rightMediaPlayerControl.Media.Source = null; } catch { }
+                }
+                try { rightMediaPlayerControl.Source = null; } catch { }
+
+                // ウィンドウから切り離して破棄
+                try { rightPlayer.Content = null; } catch { }
+                try { rightPlayer.Close(); } catch { }
+                rightPlayer = null;
+                rightMediaPlayerControl = null;
+
+                App.WriteLog("右画面のプレイヤーを破棄しました。");
+            }
+            Button2.IsEnabled = true;//再作成ボタン有効化
+            Button2_Destroy.IsEnabled = false;//破棄ボタン無効化
+            RightDDLabel.Visibility = Visibility.Visible;//ドラッグアンドドロップラベル表示
+            RightDragArea.AllowDrop = true;//ドラッグアンドドロップ有効化
         }
 
         private void NumRightDisplay_TextChanged(object sender, TextChangedEventArgs e)
@@ -400,6 +489,7 @@ namespace _3DVideoPlayer
             {
                 LeftVideoWidthNow.Text = ((int)newSize.Width).ToString();
                 LeftVideoHeightNow.Text = ((int)newSize.Height).ToString();
+                LeftVideoHeight.Text = ((int)newSize.Height).ToString();
             });
         }
 
@@ -457,6 +547,8 @@ namespace _3DVideoPlayer
             finally
             {
                 e.Handled = true;
+                LeftDDLabel.Visibility = Visibility.Hidden;//ドラッグアンドドロップラベル非表示
+                LeftDragArea.AllowDrop = false;//ドラッグアンドドロップ無効化
                 leftMediaPlayerControl?.Play();
                 leftMediaPlayerControl?.Pause();
                 leftMediaPlayerControl?.Seek(TimeSpan.FromSeconds(0));
@@ -549,6 +641,8 @@ namespace _3DVideoPlayer
             });
         }
 
+        
+
         private void RightDrop(object sender, System.Windows.DragEventArgs e)
         {
             try
@@ -585,6 +679,8 @@ namespace _3DVideoPlayer
             finally
             {
                 e.Handled = true;
+                RightDDLabel.Visibility = Visibility.Hidden;//ドラッグアンドドロップラベル非表示
+                RightDragArea.AllowDrop = false;//ドラッグアンドドロップ無効化
                 rightMediaPlayerControl?.Play();
                 rightMediaPlayerControl?.Pause();
                 rightMediaPlayerControl?.Seek(TimeSpan.FromSeconds(0));
@@ -597,6 +693,7 @@ namespace _3DVideoPlayer
             {
                 RightVideoWidthNow.Text = ((int)newSize.Width).ToString();
                 RightVideoHeightNow.Text = ((int)newSize.Height).ToString();
+                RightVideoHeight.Text = ((int)newSize.Height).ToString();
             });
         }
 
@@ -628,6 +725,31 @@ namespace _3DVideoPlayer
                     App.WriteLog("ButtonAllPlay: right play failed - " + ex.Message);
                 }
             });
+        }
+
+        // Add volume slider handlers
+        private void LeftVolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (leftMediaPlayerControl != null)
+            {
+                try
+                {
+                    leftMediaPlayerControl.Media.Volume = LeftVolumeSlider.Value;
+                }
+                catch { }
+            }
+        }
+
+        private void RightVolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (rightMediaPlayerControl != null)
+            {
+                try
+                {
+                    rightMediaPlayerControl.Media.Volume = RightVolumeSlider.Value;
+                }
+                catch { }
+            }
         }
     }
 }
