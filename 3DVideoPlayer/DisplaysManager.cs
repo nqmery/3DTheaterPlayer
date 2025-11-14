@@ -38,7 +38,7 @@ namespace _3DVideoPlayer
                 //ディスプレイの左上の座標を表示
                 App.WriteLog($"X:{s.Bounds.X} Y:{s.Bounds.Y}");
                 //ディスプレイの大きさを表示
-                App.WriteLog($"高さ:{s.Bounds.Height} 幅:{s.Bounds.Width}");
+                App.WriteLog($" 幅:{s.Bounds.Width} 高さ:{s.Bounds.Height}");
             }
 
             /*
