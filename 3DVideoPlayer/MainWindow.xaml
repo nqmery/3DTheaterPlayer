@@ -4,9 +4,111 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_3DVideoPlayer"
+        xmlns:controls="clr-namespace:WpfNumericTextBoxStudy"
         mc:Ignorable="d"
+        Closing="Window_Closing"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="LogDisplay" Grid.Column="3" Grid.Row="0" Grid.RowSpan="4" TextWrapping="Wrap" Margin="10,10,10,10" VerticalScrollBarVisibility="Auto" />
+        <Button x:Name="LogTestButton" Grid.Column="0" Grid.Row="0" Content="ディスプレイの選択" Margin="10,136,45,0" Click="LogButtonPressed" Height="22" VerticalAlignment="Top"/>
+        <Button x:Name="Button1" Grid.Column="0" Grid.Row="0" Content="左ウィンドウの生成"  Click="Button1_Click" Height="22" VerticalAlignment="Bottom" Margin="10,0,39,119"/>
+        <Button x:Name="Button2" Grid.Column="0" Grid.Row="0" Content="右ウィンドウの生成"  Click="Button2_Click" Height="22" VerticalAlignment="Top" Margin="10,232,39,0"/>
+        <Label Content="左" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="10,71,0,0"/>
+        <Label Content="右" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="10,97,0,0"/>
+        <controls:IntTextBox x:Name="NumLeftDisplay" Text="0" HorizontalAlignment="Center" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalContentAlignment="Right" Width="75" Margin="0,76,0,0"/>
+        <controls:IntTextBox x:Name="NumRightDisplay" Text="1" HorizontalAlignment="Center" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalContentAlignment="Right" Width="75" Margin="0,99,0,0"/>
+
+       <Slider Name="LeftSeekSlider" Grid.Column="1" Grid.Row="1" Margin="5"
+PreviewMouseLeftButtonDown="LeftSeekSlider_PreviewMouseLeftButtonDown" 
+PreviewMouseLeftButtonUp="LeftSeekSlider_PreviewMouseLeftButtonUp"
+ValueChanged="LeftSeekSlider_ValueChanged" />
+
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+            <Button Name="LeftPlayButton" Content="Play" Margin="5" Click="LeftPlayButton_Click" Focusable="False"/>
+            <Button Name="LeftPauseButton" Content="Pause" Margin="5" Click="LeftPauseButton_Click" Focusable="False"/>
+            <Button Name="LeftStopButton" Content="Stop" Margin="5" Click="LeftStopButton_Click" Focusable="False"/>
+            <Slider Name="LeftVolumeSlider" Width="100" Maximum="1" Margin="5" Value="{Binding ElementName=Media, Path=leftMediaPlayerControl.Media}"/>
+        </StackPanel>
+        <controls:IntTextBox x:Name="LeftVideoHeight" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="1080" VerticalAlignment="Top" Width="93" Margin="7,101,0,0"/>
+        <Label Content="動画の高さを指定" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,75,0,0"/>
+        <Button x:Name="LeftButton_Resize" Grid.Column="1" Content="リサイズ！" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="-0.117,-0.328" Click="LeftButton_Resize_Click" Margin="105,100,0,0"/>
+        <controls:IntTextBox x:Name="LeftPosX" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="48" Margin="49,181,0,0"/>
+        <controls:IntTextBox x:Name="LeftPosY" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="49" Margin="49,205,0,0"/>
+        <Label Content="X" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,177,0,0"/>
+        <Label Content="Y" Grid.Column="1" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="8,201,0,0"/>
+        <Button x:Name="LeftButton_Move" Content="移動！" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Click="LeftButton_Move_Click" Margin="114,188,0,0"/>
+        <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="11,34,0,0" Width="112"><Run Text="ログを見てディスプレイ"/><Run Language="ja-jp" Text="の"/><LineBreak/><Run Language="ja-jp"/><Run Text="番号を選択してください。"/></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="7,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="ja-jp" Text="現在の動画サイズ"/></TextBlock>
+        <StackPanel Grid.Column="1"  Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Margin="7,52,0,0" Width="104" >
+            <TextBlock Name="LeftVideoWidthNow"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="null" Margin="4"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="x" Margin="4"/>
+            <TextBlock x:Name="LeftVideoHeightNow" TextWrapping="Wrap" Text="null" Margin="4"/>
+        </StackPanel>
+        <TextBlock Grid.Column="1"  Grid.Row="0" HorizontalAlignment="Left" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="ja-jp" Text="現在の動画の座標"/></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="0" Name="LeftVideoPosNow"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="(0,0)" Margin="10,157,0,0" Height="22" VerticalAlignment="Top"/>
+        <Rectangle x:Name="LeftDragArea" Grid.Column="1" HorizontalAlignment="Center" Height="64" Margin="0,243,0,0" Stroke="#FFBDBDBD" VerticalAlignment="Top" Width="146"
+                   AllowDrop="True"
+                    Drop="LeftDrop"
+                    DragOver="LeftDragging" Fill="#00000000"
+                   Panel.ZIndex="2"/>
+        <Label Grid.Column="1" Content="ここにファイルをD&amp;D" HorizontalAlignment="Center" Margin="0,262,0,0" VerticalAlignment="Top" Height="26" Width="104" Panel.ZIndex="1"/>
+
+
+        <!-- Right side: duplicated from Left with 'Right' prefixes -->
+        <Slider Name="RightSeekSlider" Grid.Column="2" Grid.Row="1" Margin="5"
+PreviewMouseLeftButtonDown="RightSeekSlider_PreviewMouseLeftButtonDown" 
+PreviewMouseLeftButtonUp="RightSeekSlider_PreviewMouseLeftButtonUp"
+ValueChanged="RightSeekSlider_ValueChanged" />
+
+        <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
+            <Button Name="RightPlayButton" Content="Play" Margin="5" Click="RightPlayButton_Click" Focusable="False"/>
+            <Button Name="RightPauseButton" Content="Pause" Margin="5" Click="RightPauseButton_Click" Focusable="False"/>
+            <Button Name="RightStopButton" Content="Stop" Margin="5" Click="RightStopButton_Click" Focusable="False"/>
+            <Slider Name="RightVolumeSlider" Width="100" Maximum="1" Margin="5" Value="{Binding ElementName=Media, Path=leftMediaPlayerControl.Media}"/>
+        </StackPanel>
+        <controls:IntTextBox x:Name="RightVideoHeight" Grid.Column="2" HorizontalAlignment="Left" TextWrapping="Wrap" Text="1080" VerticalAlignment="Top" Width="93" Margin="7,101,0,0"/>
+        <Label Content="動画の高さを指定" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,75,0,0"/>
+        <Button x:Name="RightButton_Resize" Grid.Column="2" Content="リサイズ！" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="-0.117,-0.328" Click="RightButton_Resize_Click" Margin="105,100,0,0"/>
+        <controls:IntTextBox x:Name="RightPosX" Grid.Column="2" HorizontalAlignment="Left" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="48" Margin="49,181,0,0"/>
+        <controls:IntTextBox x:Name="RightPosY" Grid.Column="2" HorizontalAlignment="Left" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="49" Margin="49,205,0,0"/>
+        <Label Content="X" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,177,0,0"/>
+        <Label Content="Y" Grid.Column="2" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="8,201,0,0"/>
+        <Button x:Name="RightButton_Move" Content="移動！" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Click="RightButton_Move_Click" Margin="114,188,0,0"/>
+        
+        <TextBlock Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Margin="7,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="ja-jp" Text="現在の動画サイズ"/></TextBlock>
+        <StackPanel Grid.Column="2"  Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Margin="7,52,0,0" Width="104" >
+            <TextBlock Name="RightVideoWidthNow"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="null" Margin="4"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="x" Margin="4"/>
+            <TextBlock x:Name="RightVideoHeightNow" TextWrapping="Wrap" Text="null" Margin="4"/>
+        </StackPanel>
+        <TextBlock Grid.Column="2"  Grid.Row="0" HorizontalAlignment="Left" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="ja-jp" Text="現在の動画の座標"/></TextBlock>
+        <TextBlock Grid.Column="2" Grid.Row="0" Name="RightVideoPosNow"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="(0,0)" Margin="10,157,0,0" Height="22" VerticalAlignment="Top"/>
+        <Rectangle x:Name="RightDragArea" Grid.Column="2" HorizontalAlignment="Center" Height="64" Margin="0,243,0,0" Stroke="#FFBDBDBD" VerticalAlignment="Top" Width="146"
+                   AllowDrop="True"
+                    Drop="RightDrop"
+                    DragOver="RightDragging" Fill="#00000000"
+                   Panel.ZIndex="2"/>
+        <Label Grid.Column="2" Content="ここにファイルをD&amp;D" HorizontalAlignment="Center" Margin="0,262,0,0" VerticalAlignment="Top" Height="26" Width="104" Panel.ZIndex="1"/>
+
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Background="#4C000000">
+            <Button x:Name="ButtonAllPlay" Content="Play" Click="ButtonAllPlay_Click" HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="5"/>
+            <Button x:Name="ButtonAllPause" Content="Pause" HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="5"/>
+            <Button x:Name="ButtonAllStop" Content="Pause" HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="5"/>
+        </StackPanel>
 
     </Grid>
 </Window>
